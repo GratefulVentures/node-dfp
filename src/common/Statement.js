@@ -10,7 +10,9 @@ class Statement extends Object {
         this.order = pluck(conditions, 'order')
         this.offset = pluck(conditions, 'offset')
         this.page = pluck(conditions, 'page')
-        this.query = omit(conditions, ['limit', 'order'])
+        this.values = pluck(conditions, 'values')
+        this.query = pluck(conditions, 'query')
+        this.conditions = omit(conditions, ['limit', 'order', 'values', 'page', 'offset'])
 
         this.filterStatement = this.createStatement()
     }
@@ -18,6 +20,7 @@ class Statement extends Object {
     createStatement() {
         let statement = []
         let query = this.query
+        let values = this.values || []
 
         if (query === Object(query)) {
             query = Object.keys(query).map(field => {
@@ -31,7 +34,26 @@ class Statement extends Object {
 
         statement.push(this.createLimitClause())
 
-        return { query: statement.filter(st => st && st.length).join(' ') }
+        let result = { query: statement.filter(st => st && st.length).join(' ') }
+
+        if (values.length) {
+            result.values = values.map(value => {
+                return {
+                    attributes: {
+                        'xsi:type': 'dfp:String_ValueMapEntry'
+                    },
+                    key: value.key,
+                    value: {
+                        attributes: {
+                            'xsi:type': 'dfp:TextValue'
+                        },
+                        value: value.value
+                    }
+                }
+            })
+        }
+
+        return result
     }
 
     createWhereClause(field, value) {
@@ -47,7 +69,10 @@ class Statement extends Object {
                 formatted = `(${formatted})`
             }
         } else if (typeof value === 'string') {
-            formatted = JSON.stringify(value)
+            if (0 !== value.indexOf(':')) {
+                value = JSON.stringify(value)
+            }
+            formatted = value
         }
 
         if (formatted.length) {
@@ -83,41 +108,10 @@ class Statement extends Object {
         }
     }
 
+    toJSON() {
+        return { filterStatement: this.createStatement() }
+    }
+
 }
-
-Object.defineProperty(Statement.prototype, 'query', {
-  enumerable: false,
-  configurable: true,
-  writable: true
-})
-
-Object.defineProperty(Statement.prototype, 'order', {
-  enumerable: false,
-  configurable: true,
-  writable: true
-})
-
-Object.defineProperty(Statement.prototype, 'limit', {
-  enumerable: false,
-  configurable: true,
-  writable: true
-})
-
-Object.defineProperty(Statement.prototype, 'offset', {
-  enumerable: false,
-  configurable: true,
-  writable: true
-})
-
-Object.defineProperty(Statement.prototype, 'page', {
-  enumerable: false,
-  configurable: true,
-  writable: true
-})
-
-// let descriptor = Object.getOwnPropertyDescriptor(Statement.prototype, 'filterStatement')
-// descriptor.enumerable = true
-
-// Object.defineProperty(Statement.prototype, 'filterStatement', descriptor)
 
 export default Statement

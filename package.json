@@ -28,7 +28,9 @@
   "bugs": {
     "url": "https://github.com/GratefulVentures/node-dfp/issues"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "homepage": "https://github.com/GratefulVentures/node-dfp",
   "devDependencies": {
     "babel": "^5.0.0",
@@ -64,6 +66,6 @@
     "bluebird": "^2.9.24",
     "debug": "^2.1.3",
     "es6-promise": "^2.1.0",
-    "node-google-dfp": "ShinyAds/node-google-dfp"
+    "soap": "^0.9.1"
   }
 }

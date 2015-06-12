@@ -29,6 +29,11 @@ describe('Statement class', () => {
     it('filterStatement', () => {
       expect(JSON.stringify(create({ limit: 10 }))).to.equal('{"filterStatement":{"query":"LIMIT 10"}}')
     })
+
+    it('allows value map', () => {
+      let conditions = { query: { name: ':name' }, values: [{key: 'name', value: 'testing' }] }
+      expect(create(conditions).filterStatement).to.have.propery('query', 'WHERE name = :name')
+    })
   })
 
 })

@@ -1,6 +1,5 @@
 import Statement from './common/Statement'
 import ObjectCreator from './common/ObjectCreator'
-import util from 'util'
 
 class Service {
 
@@ -22,7 +21,7 @@ class Service {
 
         let statement = new Statement(query)
 
-        return { filterStatement: statement.filterStatement }
+        return { filterStatement: statement.createStatement() }
     }
 
     list(query) {

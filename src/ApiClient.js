@@ -1,5 +1,4 @@
-import Dfp from 'node-google-dfp'
-import bluebird from 'bluebird'
+import SoapClient from './SoapClient'
 
 import InventoryService from './inventory/Service'
 import OrderService from './order/Service'
@@ -42,7 +41,7 @@ const ServiceAliases = createAliases()
 class ApiClient {
 
     constructor(networkCode, displayName, version) {
-        this.dfpUser = new Dfp.User(networkCode, displayName, version)
+        this.soap = new SoapClient(networkCode, displayName, version)
 
         this.services = {}
     }
@@ -72,13 +71,36 @@ class ApiClient {
     setAuthClient(authClient) {
         this.authClient = authClient
 
-        this.dfpUser.setClient(authClient)
-
         return this
+    }
+
+    authenticate() {
+        if (! this.authClient) {
+            throw new Error('Attempted to load a service before authenticating')
+        }
+
+        return new Promise((resolve, reject) => {
+            this.authClient.authorize((err, token) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    this.isAuthenticated = true
+                    this.soap.setCredentials(
+                        `${token.token_type} ${token.access_token}`
+                    )
+                    resolve()
+                }
+            })
+        })
     }
 
     getServices(...serviceNames) {
         let services = {}
+
+        if (! this.isAuthenticated) {
+            return this.authenticate()
+                .then(() => this.getServices(...serviceNames))
+        }
 
         serviceNames = serviceNames.map(this.resolveServiceName)
 
@@ -91,27 +113,20 @@ class ApiClient {
             })
     }
 
-    getService(serviceName, callback) {
+    getService(serviceName) {
         serviceName = this.resolveServiceName(serviceName)
 
-        let promise = new Promise(resolve => {
-            if (serviceName in this.services) {
-                return resolve(this.services[serviceName])
-            }
-            this.dfpUser.getService(serviceName, resolve)
-        }).then(service => {
-            return bluebird.promisifyAll(service)
-        }).then(service => {
-            this.services[serviceName] = service
-
-            return service
-        })
-
-        if (callback) {
-            promise.then(callback)
+        if (serviceName in this.services) {
+            return Promise.resolve(this.services[serviceName])
         }
 
-        return promise
+        return this.soap
+            .getService(serviceName)
+            .then(service => {
+                this.services[serviceName] = service
+
+                return service
+            })
     }
 
     resolveServiceName(serviceName) {
@@ -120,6 +135,31 @@ class ApiClient {
         }
 
         return serviceName
+    }
+
+    fromDfpDate(dfpDate) {
+        return new Date(
+            dfpDate.date.year,
+            dfpDate.date.month,
+            dfpDate.date.day,
+            dfpDate.hour,
+            dfpDate.minute,
+            dfpDate.second
+        )
+    }
+
+    toDfpDate(date, timeZoneID) {
+        return {
+            date: {
+                year: date.getFullYear(),
+                month: date.getMonth() + 1,
+                day: date.getDate()
+            },
+            hour: date.getHours(),
+            minute: date.getMinutes(),
+            second: date.getSeconds(),
+            timeZoneID: timeZoneID
+        }
     }
 }
 
