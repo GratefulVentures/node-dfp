@@ -1,7 +1,12 @@
 import Soap from 'soap'
 
-
-class SoapClient {
+export default class SoapClient {
+    // networkCode: string;
+    // applicationName: string;
+    // version: string;
+    // wsdlBase: string;
+    // ns: string;
+    // security: any;
 
     constructor(networkCode, applicationName, version = 'v201505') {
         this.networkCode = networkCode
@@ -23,7 +28,7 @@ class SoapClient {
     }
 
     createRequestHeader() {
-        const RequestHeader = {
+        var RequestHeader = {
             attributes: {
                 'xsi:type':  'SoapRequestHeader',
                 'xmlns:ns1': this.ns
@@ -36,7 +41,7 @@ class SoapClient {
     }
 
     getService(serviceName) {
-        const wsdl = `${this.wsdlBase}/${this.version}/${serviceName}?wsdl`
+        var wsdl = `${this.wsdlBase}/${this.version}/${serviceName}?wsdl`
 
         return this.createClient(wsdl)
             .then(client => {
@@ -60,5 +65,3 @@ class SoapClient {
     }
 
 }
-
-export default SoapClient

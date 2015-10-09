@@ -7,8 +7,10 @@ import NetworkService from './network/Service'
 import CompanyService from './company/Service'
 import UserService from './user/Service'
 import CreativeService from './creative/Service'
+import CustomTargetingService from './customTargeting/Service'
 import CreativeWrapperService from './creativeWrapper/Service'
 import LineItemCreativeAssociationService from './lineItemCreativeAssociation/Service'
+import ReportService from './report/Service'
 
 const ServiceMap = {
     inventory: InventoryService,
@@ -18,8 +20,10 @@ const ServiceMap = {
     company: CompanyService,
     users: UserService,
     creative: CreativeService,
+    customTargeting: CustomTargetingService,
     creativeWrapper: CreativeWrapperService,
-    lineItemCreativeAssociation: LineItemCreativeAssociationService
+    lineItemCreativeAssociation: LineItemCreativeAssociationService,
+    report: ReportService
 }
 
 function createAliases() {
@@ -34,8 +38,6 @@ function createAliases() {
 }
 
 const ServiceAliases = createAliases()
-
-
 
 
 class ApiClient {

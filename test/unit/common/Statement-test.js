@@ -31,8 +31,8 @@ describe('Statement class', () => {
     })
 
     it('allows value map', () => {
-      let conditions = { query: { name: ':name' }, values: [{key: 'name', value: 'testing' }] }
-      expect(create(conditions).filterStatement).to.have.propery('query', 'WHERE name = :name')
+      let conditions = { query: { name: ':name' }, values: [{ key: 'name', value: 'testing' }] }
+      expect(create(conditions).filterStatement).to.have.property('query', 'WHERE name = :name')
     })
   })
 
