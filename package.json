@@ -4,10 +4,12 @@
   "description": "API wrapper for Doubleclick for Publishers",
   "main": "dist/index.js",
   "scripts": {
-    "test": "gulp",
-    "test-browser": "gulp test-browser",
     "build": "gulp build",
-    "coverage": "gulp coverage"
+    "coverage": "gulp coverage",
+    "lint": "eslint ./*.js src/**/*.js test/**/*.js",
+    "lint:fix": "npm run lint --fix",
+    "test": "gulp",
+    "test:browser": "gulp test-browser"
   },
   "repository": {
     "type": "git",
@@ -36,6 +38,9 @@
     "babel": "^5.0.0",
     "chai": "^2.0.0",
     "del": "^1.1.1",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
     "glob": "^4.3.5",
     "gulp": "^3.8.10",
     "gulp-babel": "^5.0.0",
@@ -44,6 +49,7 @@
     "gulp-istanbul": "^0.6.0",
     "gulp-jscs": "^1.4.0",
     "gulp-jshint": "^1.9.0",
+    "gulp-livereload": "^3.8.1",
     "gulp-load-plugins": "^0.8.0",
     "gulp-mocha": "^2.0.0",
     "gulp-notify": "^2.1.0",
@@ -55,6 +61,7 @@
     "jshint-stylish": "^1.0.0",
     "mkdirp": "^0.5.0",
     "mocha": "^2.1.0",
+    "prettier": "^1.11.1",
     "run-sequence": "^1.0.2",
     "sinon": "^1.12.2",
     "sinon-chai": "^2.7.0",
