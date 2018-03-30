@@ -16,14 +16,11 @@
     "url": "https://github.com/GratefulVentures/node-dfp.git"
   },
   "keywords": [
-    "boilerplate",
-    "es6",
-    "node",
-    "starter",
-    "kit",
-    "transpile",
-    "6to5",
-    "babel"
+    "dfp",
+    "nodejs",
+    "google",
+    "ads",
+    "api"
   ],
   "author": "Justin Rainbow <justin@grateful.ventures>",
   "license": "MIT",
