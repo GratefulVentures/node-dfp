@@ -1,5 +1,3 @@
-class Company {
+class Company {}
 
-}
-
-export default Company
+export default Company;

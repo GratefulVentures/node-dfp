@@ -1,8 +1,8 @@
 const CreativeRotationType = {
-    'EVEN':       'EVEN',
-    'OPTIMIZED':  'OPTIMIZED',
-    'MANUAL':     'MANUAL',
-    'SEQUENTIAL': 'SEQUENTIAL'
-}
+  EVEN: 'EVEN',
+  OPTIMIZED: 'OPTIMIZED',
+  MANUAL: 'MANUAL',
+  SEQUENTIAL: 'SEQUENTIAL'
+};
 
-export default CreativeRotationType
+export default CreativeRotationType;

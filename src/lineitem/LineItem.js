@@ -1,5 +1,3 @@
-class LineItem {
+class LineItem {}
 
-}
-
-export default LineItem
+export default LineItem;

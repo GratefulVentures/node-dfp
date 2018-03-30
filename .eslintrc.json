@@ -1,0 +1,8 @@
+{
+  "extends": ["@grateful/node"],
+  "globals": {
+    "afterEach": true,
+    "beforeEach": true,
+    "Promise": true
+  }
+}

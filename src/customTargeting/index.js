@@ -1,3 +1,3 @@
-import CustomTargetingService from './Service'
+import CustomTargetingService from './Service';
 
-export { CustomTargetingService }
+export { CustomTargetingService };

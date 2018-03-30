@@ -1,22 +1,14 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
-const fs = require('fs');
 const del = require('del');
-const glob = require('glob');
 const path = require('path');
-const mkdirp = require('mkdirp');
 const isparta = require('isparta');
 const runSequence = require('run-sequence');
-const source = require('vinyl-source-stream');
 
 const manifest = require('./package.json');
 const config = {
-  mochaGlobals: [
-    "stub",
-    "spy",
-    "expect"
-  ]
-}
+  mochaGlobals: ['stub', 'spy', 'expect']
+};
 const mainFile = manifest.main;
 const destinationFolder = path.dirname(mainFile);
 
@@ -31,27 +23,30 @@ gulp.task('clean-tmp', function(cb) {
 });
 
 // Build two versions of the library
-gulp.task('build', ['clean'], function(done) {
-  return gulp.src('src/**/*.js')
+gulp.task('build', ['clean'], function() {
+  return gulp
+    .src('src/**/*.js')
     .pipe($.babel())
-    .pipe(gulp.dest('dist'))
-})
+    .pipe(gulp.dest('dist'));
+});
 
 gulp.task('coverage', function(done) {
   require('babel/register')({ modules: 'common' });
-  gulp.src(['src/**/*.js'])
+  gulp
+    .src(['src/**/*.js'])
     .pipe($.istanbul({ instrumenter: isparta.Instrumenter }))
     .pipe($.istanbul.hookRequire())
     .on('finish', function() {
       return test()
-      .pipe($.istanbul.writeReports())
-      .on('end', done);
+        .pipe($.istanbul.writeReports())
+        .on('end', done);
     });
 });
 
 function test() {
-  return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
-    .pipe($.mocha({reporter: 'dot', globals: config.mochaGlobals}));
+  return gulp
+    .src(['test/setup/node.js', 'test/unit/**/*.js'], { read: false })
+    .pipe($.mocha({ reporter: 'dot', globals: config.mochaGlobals }));
 }
 
 // run our tests
@@ -75,7 +70,7 @@ gulp.task('watch', function() {
 
 // Set up a livereload environment for our spec runner
 gulp.task('test-browser', ['build-in-sequence'], function() {
-  $.livereload.listen({port: 35729, host: 'localhost', start: true});
+  $.livereload.listen({ port: 35729, host: 'localhost', start: true });
   return gulp.watch(watchFiles, ['build-in-sequence']);
 });
 

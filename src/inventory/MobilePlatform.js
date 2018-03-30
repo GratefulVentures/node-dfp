@@ -1,7 +1,6 @@
-
 const MobilePlatform = {
-    'SITE': 'SITE',
-    'APPLICATION': 'APPLICATION'
-}
+  SITE: 'SITE',
+  APPLICATION: 'APPLICATION'
+};
 
-export default MobilePlatform
+export default MobilePlatform;

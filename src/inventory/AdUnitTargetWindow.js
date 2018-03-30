@@ -1,7 +1,6 @@
-
 const AdUnitTargetWindow = {
-    TOP: 'TOP',
-    BLANK: 'BLANK'
-}
+  TOP: 'TOP',
+  BLANK: 'BLANK'
+};
 
-export default AdUnitTargetWindow
+export default AdUnitTargetWindow;
