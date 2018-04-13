@@ -1,18 +1,18 @@
-import ApiClient from './ApiClient'
+import ApiClient from './ApiClient';
 
-import Statement from './common/Statement'
-import { AdUnit } from './inventory'
+import Statement from './common/Statement';
+import { AdUnit } from './inventory';
 
 export default {
-    createClient(...args) {
-        return new ApiClient(...args)
-    },
+  createClient(...args) {
+    return new ApiClient(...args);
+  },
 
-    AdUnit,
+  AdUnit,
 
-    Statement,
+  Statement,
 
-    get adunit() {
-        return new AdUnit()
-    }
-}
+  get adunit() {
+    return new AdUnit();
+  }
+};

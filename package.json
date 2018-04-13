@@ -6,7 +6,7 @@
   "scripts": {
     "build": "gulp build",
     "coverage": "gulp coverage",
-    "lint": "eslint ./*.js src/**/*.js test/**/*.js",
+    "lint": "eslint **/*.js",
     "lint:fix": "npm run lint -- --fix",
     "test": "gulp",
     "test:browser": "gulp test-browser"
