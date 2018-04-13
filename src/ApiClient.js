@@ -12,6 +12,7 @@ import CreativeWrapperService from './creativeWrapper/Service';
 import LineItemCreativeAssociationService from './lineItemCreativeAssociation/Service';
 import ReportService from './report/Service';
 import PlacementService from './placement/Service';
+import LabelService from './label/Service';
 
 const ServiceMap = {
   inventory: InventoryService,
@@ -25,7 +26,8 @@ const ServiceMap = {
   creativeWrapper: CreativeWrapperService,
   lineItemCreativeAssociation: LineItemCreativeAssociationService,
   report: ReportService,
-  placement: PlacementService
+  placement: PlacementService,
+  label: LabelService
 };
 
 function createAliases() {
