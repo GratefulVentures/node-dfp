@@ -11,6 +11,8 @@ import CustomTargetingService from './customTargeting/Service';
 import CreativeWrapperService from './creativeWrapper/Service';
 import LineItemCreativeAssociationService from './lineItemCreativeAssociation/Service';
 import ReportService from './report/Service';
+import PlacementService from './placement/Service';
+import LabelService from './label/Service';
 
 const ServiceMap = {
   inventory: InventoryService,
@@ -23,7 +25,9 @@ const ServiceMap = {
   customTargeting: CustomTargetingService,
   creativeWrapper: CreativeWrapperService,
   lineItemCreativeAssociation: LineItemCreativeAssociationService,
-  report: ReportService
+  report: ReportService,
+  placement: PlacementService,
+  label: LabelService
 };
 
 function createAliases() {
