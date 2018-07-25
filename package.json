@@ -30,7 +30,7 @@
     "url": "https://github.com/GratefulVentures/node-dfp/issues"
   },
   "files": [
-    "dist"
+    "lib"
   ],
   "homepage": "https://github.com/GratefulVentures/node-dfp",
   "devDependencies": {
