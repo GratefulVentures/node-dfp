@@ -1,15 +1,17 @@
 {
-  "name": "dfp",
-  "version": "0.2.0",
+  "name": "@grateful/dfp",
+  "version": "1.0.0",
   "description": "API wrapper for Doubleclick for Publishers",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "gulp build",
     "coverage": "gulp coverage",
     "lint": "eslint 'src/**/*.js' 'test/**/*.js' '*.js'",
     "lint:fix": "npm run lint -- --fix",
     "test": "gulp",
-    "test:browser": "gulp test-browser"
+    "test:browser": "gulp test-browser",
+    "release": "yarn build && release patch",
+    "release:minor": "yarn build && release minor"
   },
   "repository": {
     "type": "git",
@@ -22,7 +24,7 @@
     "ads",
     "api"
   ],
-  "author": "Justin Rainbow <justin@grateful.ventures>",
+  "author": "Grateful Team <dev@grateful.io>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GratefulVentures/node-dfp/issues"
@@ -60,6 +62,7 @@
     "mkdirp": "^0.5.0",
     "mocha": "^2.1.0",
     "prettier": "^1.11.1",
+    "release": "^4.0.1",
     "run-sequence": "^1.0.2",
     "sinon": "^1.12.2",
     "sinon-chai": "^2.7.0",
