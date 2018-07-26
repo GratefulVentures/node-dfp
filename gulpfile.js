@@ -27,7 +27,7 @@ gulp.task('build', ['clean'], function() {
   return gulp
     .src('src/**/*.js')
     .pipe($.babel())
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('lib'));
 });
 
 gulp.task('coverage', function(done) {

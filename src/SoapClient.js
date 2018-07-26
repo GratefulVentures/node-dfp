@@ -8,7 +8,7 @@ export default class SoapClient {
   // ns: string;
   // security: any;
 
-  constructor(networkCode, applicationName, version = 'v201505') {
+  constructor(networkCode, applicationName, version = 'v201805') {
     this.networkCode = networkCode;
     this.applicationName = applicationName;
     this.version = version;

@@ -1,13 +1,13 @@
-# Doubleclick for Publishers API Wrapper
+# Grateful Doubleclick for Publishers API Wrapper
 
-This is an extremely new API wrapper for the DFP API.  The entire API is subject to change and is definitely not recommended for production use. **Please, be very very cautious.**
+This is an extremely new API wrapper for the DFP API. The entire API is subject to change and is definitely not recommended for production use. **Please, be very very cautious.**
 
 # 💀
 
 ### Install
 
 ```shell
-npm install dfp
+npm install @grateful/dfp
 ```
 
 ### Usage
@@ -30,7 +30,7 @@ dfp.Statement
 ```js
 // Create a DFP Client
 var dfp = require('dfp');
-var {google} = require('googleapis');
+var { google } = require('googleapis');
 
 var dfpClient = dfp.createClient(
   networkId, // 123456789
@@ -41,4 +41,12 @@ var dfpClient = dfp.createClient(
 var jwtClient = google.auth.JWT(/* your creds */);
 
 dfpClient.setAuthClient(jwtClient);
+```
+
+### Deployments (Publish new verion)
+
+This project includes `release` and can deploy a new version of the package by the following:
+
+```shell
+yarn release
 ```
